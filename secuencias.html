@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secuencias - Lord of the Mysteries</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6L22B6NHBS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6L22B6NHBS');
+    </script>
+    <style>
+        /* Estilos específicos para la tabla/grid de secuencias */
+        .sequences-grid {
+            display: grid;
+            /* Ahora solo 11 columnas: Secuencia 9 a 0, más True God y Great Old One */
+            grid-template-columns: repeat(11, minmax(80px, 1fr)); /* Aumentado a 80px para mejor espacio */
+            gap: 1px; /* Espacio entre las celdas para el efecto de cuadrícula */
+            border: 1px solid #48cae440; /* Borde exterior de la tabla */
+            background-color: rgba(13, 2, 33, 0.7); /* Fondo oscuro para las celdas */
+            overflow-x: auto; /* Permite scroll horizontal si la tabla es muy ancha */
+        }
+        .sequences-grid-header, .sequences-grid-cell {
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ade8f4; /* Azul neón para el texto */
+            border: 1px solid rgba(72, 202, 228, 0.2); /* Bordes internos más suaves */
+            background-color: rgba(13, 2, 33, 0.7); /* Asegura el fondo de la celda */
+            /* REMOVIDO: white-space: nowrap; -> Esto permite que el texto se envuelva */
+            box-sizing: border-box; /* Asegura que padding y border se incluyan en el tamaño total */
+        }
+        .sequences-grid-header {
+            background-color: rgba(72, 202, 228, 0.3); /* Fondo ligeramente diferente para los encabezados */
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .sequences-grid-cell a {
+            display: block; /* Hace que el enlace ocupe toda la celda */
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit; /* Hereda el color del texto de la celda */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            padding: 0.75rem 0.5rem; /* Ajusta el padding dentro del enlace */
+        }
+        .sequences-grid-cell a:hover {
+            background-color: rgba(72, 202, 228, 0.5); /* Resalta al pasar el ratón */
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #ade8f4;
+            position: relative; /* Para que el transform funcione bien */
+            z-index: 10; /* Asegura que la celda hover esté encima */
+        }
+        /* La clase .path-name y sus estilos ya no son necesarios ya que la columna ha sido eliminada */
+
+        /* Colores de texto según el grupo */
+        .color-red { color: #f87171; text-shadow: 0 0 3px #ef4444; } /* Villain, Scrooge */
+        .color-purple { color: #c084fc; text-shadow: 0 0 3px #a855f7; } /* Dancer, Broker */
+        .color-blue { color: #60a5fa; text-shadow: 0 0 3px #3b82f6; } /* Tramp, Astronomy Aficionado */
+        .color-orange { color: #fb923c; text-shadow: 0 0 3px #f97316; } /* Initiator, Patient */
+        .color-green { color: #4ade80; text-shadow: 0 0 3px #22c55e; } /* Shaman, Dreamless */
+
+        /* Clases para colores específicos de las secuencias True God / Great Old One */
+        .color-true-god { color: #fde047; text-shadow: 0 0 5px #facc15, 0 0 10px #eab308; } /* Amarillo más intenso */
+        .color-great-old-one { color: #ef4444; text-shadow: 0 0 5px #dc2626, 0 0 10px #b91c1c; } /* Rojo */
+    </style>
+</head>
+<body class="bg-matrix-dark text-neon-blue">
+    <header class="container mx-auto pt-12 pb-8 px-4 text-center relative z-10">
+        <h1 class="text-4xl sm:text-5xl font-bold glow-blue">Chart de Secuencias No Estándar</h1>
+    </header>
+
+    <nav class="container mx-auto py-4 px-4 text-center relative z-10 nav-matrix">
+        <a href="index.html" class="neon-link">Inicio LOTM</a>
+        <a href="#" class="neon-link active">Secuencias</a>
+        <a href="Capitulos/cap1.html" class="neon-link">Capítulos</a>
+    </nav>
+
+    <main class="container mx-auto py-12 px-4 relative z-10">
+        <div class="card-matrix text-center mb-8 p-6">
+            <h2 class="section-title glow-green mb-8">Navega por los Caminos de Beyonder</h2>
+            <p class="text-lg neon-sub-green mb-4">Haz clic en cualquier Secuencia para ver sus detalles, habilidades y requisitos.</p>
+        </div>
+
+        <div class="card-matrix p-6">
+            <h2 class="section-title glow-yellow mb-6">Secuencias vista</h2>
+            <div class="sequences-grid">
+                <div class="sequences-grid-header">9</div>
+                <div class="sequences-grid-header">8</div>
+                <div class="sequences-grid-header">7</div>
+                <div class="sequences-grid-header">6</div>
+                <div class="sequences-grid-header">5</div>
+                <div class="sequences-grid-header">4</div>
+                <div class="sequences-grid-header">3</div>
+                <div class="sequences-grid-header">2</div>
+                <div class="sequences-grid-header">1</div>
+                <div class="sequences-grid-header">0<br>(?)</div>
+                <div class="sequences-grid-header">?<br>(?)</div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Vidente</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">Payaso</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Merodeador</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Aprendiz</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Espectador</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Bardo</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Marinero</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dancer.html" class="color-purple">Lector</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_alms_monk.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_contractee.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ascetic.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_appropriator.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_inhabitant.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sufferer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sinner.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_redemption.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_aeon.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_circle_of_inevitability.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_villain.html" class="color-red">Suplicante de secretos</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_gardener.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_heretic_spellmaster.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sower.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_banshee.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_madame.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_divine_mother.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_the_supreme.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_valley_god.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_chaos_primogenitor.html" class="color-red color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_mother_goddess_of_depravity.html" class="color-red color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_scrooge.html" class="color-red">Insomne</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sex_addict.html" class="color-red">Poeta de Medianoche</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_actor.html" class="color-red">Pesadilla</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_recipient.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fallen_tree_spirit.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_tree_supplicant.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_divine_priest.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_cupid.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_leviathan.html" class="color-red">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_patriarch.html" class="color-red color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_mother_tree_of_desire.html" class="color-red color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_broker.html" class="color-purple">Recolector de Cadaveres</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_shadow_merchant.html" class="color-purple">Sepultero</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_prosecutor.html" class="color-purple">Medium Espititual</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_ambitionist.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_under_the_table.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_overseer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_vortex_weaver.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_blasphemer.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_truth.html" class="color-purple">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_chaos_mist.html" class="color-purple color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_uncertain_mist.html" class="color-purple color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_tramp.html" class="color-blue">Gerrero</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_glutton.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_gourmet.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_chef.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_depriver.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sea_monster.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_hydra.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_angel_of_devouring.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_gastric_juices.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_tail_devourer.html" class="color-blue color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_primordial_hunger.html" class="color-blue color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_astronomy_aficionado.html" class="color-blue">Asesino</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_star_worshipper.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_star_sacrificer.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_navigator.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_tidal_scholar.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_heavybringer.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_star_shepherd.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_radiant_angel.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_star_dragon.html" class="color-blue">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_condenser.html" class="color-blue color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_supernova_dominator.html" class="color-blue color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_initiator.html" class="color-orange">Cazador</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_commentator.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_orator.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_singer.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_secret_transmitter.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_philosopher.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_messenger_of_god.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_great_old_one_attendant.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_voice_of_the_heart.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_everlasting.html" class="color-orange color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_inextinguishable_ravings.html" class="color-orange color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_patient.html" class="color-orange">Indagador de Misterios</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_secretary.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_vermin.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_disease_envoy.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_child_of_decay.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_doomed_one.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_left_hand_of_decay.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_time_giant.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_god_of_decay.html" class="color-orange">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_second_law.html" class="color-orange color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_monarch_of_decay.html" class="color-orange color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_shaman.html" class="color-green">Sabio</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_reporter.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_painter.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_literary_aficionado.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_pixie.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_visitor.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_string_player.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dimensional_shadow.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_observer.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_sublunary_eye.html" class="color-green color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_high_dimensional_overseer.html" class="color-green color-great-old-one">?</a></div>
+
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_dreamless.html" class="color-green">Monstruo</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_musician.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_pryer.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_mute.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_deceased.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fatebender.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_fate_s_attendant.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_web_weaver.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_blade_of_fate.html" class="color-green">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_eternal_edict.html" class="color-green color-true-god">?</a></div>
+                <div class="sequences-grid-cell"><a href="SecuenciasDetalle/secuencia_goddess_of_fate.html" class="color-green color-great-old-one">?</a></div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <a href="index.html" class="neon-link">Volver al Inicio LOTM</a>
+        </div>
+    </main>
+
+    <footer class="container mx-auto py-6 px-4 text-center text-gray-500 text-xs relative z-10">
+        © 2025 Archivo LOTM. Todos los derechos reservados.
+    </footer>
+</body>
+</html>
